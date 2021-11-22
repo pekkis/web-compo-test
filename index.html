@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web components</title>
+
+    <style>
+      peksu-element::part(guuguna) {
+        background-color: rgb(255, 200, 200)
+      }
+    </style>
+
+  </head>
+
+  <template id="peksu-element-template">
+    <style>
+      .guuguna {
+        border: 3px dotted rgb(255, 0, 0);
+        padding: 1em;
+        margin: 1em;
+      }
+    </style>
+    <div class="guuguna" part="guuguna">
+      Guugunanmuna
+    </div>
+    <div>
+      <slot name="slotte">---</slot>
+    </div>
+  </template>
+
+  <body>
+    <h1>Peksu Mega Web Component Demofeissi</h1>
+
+    <peksu-element name="Peksufeissi">
+      <div slot="slotte">slot content</div>
+    </peksu-element>
+
+  </body>
+  <script type="module" src="src/index.tsx"></script>
+  <script type="module" src="src/elements/peksu-element-raw.ts"></script>
+</html>
