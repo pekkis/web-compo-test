@@ -1,28 +1,84 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8" />
     <title>Web components</title>
 
     <style>
-      peksu-element::part(guuguna) {
-        background-color: rgb(255, 200, 200)
+      #rootster {
+        border: 10px dotted rgb(255, 0, 255);
+        padding: 1em;
+        margin: 1em;
+      }
+
+      peksu-element-raw::part(guuguna) {
+        background-color: rgb(255, 200, 200);
+      }
+
+      peksu-element-raw::part(guuguna) {
+        background-color: rgb(255, 200, 200);
+      }
+
+      peksu-element-lit::part(tussi) {
+        font-weight: bold;
       }
     </style>
 
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Catch all peksu clicks here
+        document.addEventListener("peksu-click", () => {
+          console.log("%cpeksu-click", "color:brown");
+        });
+
+        // Losoposkize after 3s to test attr change.
+        setTimeout(() => {
+          const elm = document.getElementById("peksutin");
+          if (!elm) {
+            return;
+          }
+          elm.setAttribute("name", "Losoposki");
+        }, 3000);
+
+        // Change some complex things
+        document.getElementById("kikkelstrom").addEventListener("click", () => {
+          const elm = document.getElementById("peksutin2");
+          if (!elm) {
+            return;
+          }
+          elm.pexus = ["Peksu Grande", "Peksu Magnifico"];
+          elm.complexer = {
+            firstName: "Pekki",
+            lastName: "Pitkätossu"
+          };
+        });
+      });
+    </script>
   </head>
 
   <template id="peksu-element-template">
     <style>
+      :host {
+        display: block;
+        margin: 1em;
+        padding: 1em;
+        border: 4px dashed rgb(200, 255, 200);
+      }
+
       .guuguna {
         border: 3px dotted rgb(255, 0, 0);
         padding: 1em;
         margin: 1em;
       }
+      .stronkelo {
+        font-weight: bold;
+      }
     </style>
+
     <div class="guuguna" part="guuguna">
-      Guugunanmuna
+      Guugunanmuna <span class="stronkelo" id="name"></span>
     </div>
-    <div>
+    <div part="slotte">
       <slot name="slotte">---</slot>
     </div>
   </template>
@@ -30,11 +86,34 @@
   <body>
     <h1>Peksu Mega Web Component Demofeissi</h1>
 
-    <peksu-element name="Peksufeissi">
-      <div slot="slotte">slot content</div>
-    </peksu-element>
+    <h2>I like sticking toothpicks under my nails</h2>
 
+    <peksu-element-raw id="peksutin" name="Peksufeissi">
+      <div slot="slotte">slot content</div>
+    </peksu-element-raw>
+
+    <h2>The pain is too much...</h2>
+
+    <peksu-element-lit
+      id="peksutin2"
+      name="Lit Peksu"
+      pexus="Peksu Puuppapöksy, Puuppapöksy Peksu, Ripuli Kakkanen"
+    ></peksu-element-lit>
+
+    <peksu-element-fast
+      id="peksutin3"
+      name="FAST Peksu"
+      pexus="Peksu Puuppapöksy, Puuppapöksy Peksu, Ripuli Kakkanen"
+    >
+      <p slot="slotshof">THIS WILL BE IN SLOTSHOF SLOT</p>
+    </peksu-element-fast>
+
+    <button id="kikkelstrom">CHANGE COMPLEX DATA</button>
+
+    <div id="rootster">REACT ROOTSTER</div>
   </body>
   <script type="module" src="src/index.tsx"></script>
   <script type="module" src="src/elements/peksu-element-raw.ts"></script>
+  <script type="module" src="src/elements/peksu-element-lit.ts"></script>
+  <script type="module" src="src/elements/peksu-element-fast.ts"></script>
 </html>
