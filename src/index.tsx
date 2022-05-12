@@ -1,6 +1,8 @@
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import App from "./components/App";
 
-const root = document.getElementById("rootster") as HTMLElement;
+const rootElement = document.getElementById("rootster") as HTMLElement;
 
-render(<App />, root);
+const root = createRoot(rootElement);
+
+root.render(<App />);

@@ -1,7 +1,11 @@
-import { useState, VFC } from "react";
+import { useState, FC } from "react";
 import WrappedPeksuElementLit from "./WrappedPeksuElementLit";
 
-const App: VFC = () => {
+type Props = {
+
+}
+
+const App: FC<Props> = () => {
   const [complexer, setComplexer] = useState(undefined);
 
   return (
